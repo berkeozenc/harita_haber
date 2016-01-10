@@ -1,9 +1,16 @@
 var express = require("express");
 var GoogleMapsAPI = require("googlemaps");
+var mongoose = require('mongoose');
+
 
 var app = express();
 var path = require("path");
-var MongoClient = require('mongodb').MongoClient;
+
+require('./core/mongoose');
+
+var Address = mongoose.model('Address');
+
+
 var berkedeneme;
 var address;
 
@@ -24,8 +31,21 @@ app.get("/", function(req, res, next) {
 
 app.get('/load', function(req, res, next) {
 
-
-    var publicConfig = {
+    Address.find({}, function(err, addresses) {
+        if (err) {
+            console.log("Error occurred while gettind addresses: ", err);
+            res.status(500).json({
+                success: false,
+                data: "Technical error occurred"
+            });
+        } else {
+            res.status(200).json({
+                succces: true,
+                data: addresses
+            });
+        }
+    });
+    /*var publicConfig = {
         key: process.env.API_KEY,
         stagger_time:       1000,
         encode_polylines:   false,
@@ -49,7 +69,7 @@ app.get('/load', function(req, res, next) {
                 data: result
             })
         }
-    });
+    });*/
 });
 
 
@@ -57,20 +77,4 @@ app.get('/load', function(req, res, next) {
 var port = 3000;
 app.listen(port, function() {
     console.log("Server is running...");
-    MongoClient.connect("mongodb://admin:admin@ds039195.mongolab.com:39195/berkedeneme", function(err, db) {
-        if(!err) {
-            console.log("Database connection established");
-            berkedeneme = db;
-            var col =  berkedeneme.collection("addresses");
-
-            col.find({"address":"ankara"}).toArray(function(err,result){
-                //console.log(result[0].address);
-                address = result[0].address;
-
-            });
-        }
-        else{
-            console.log(err.message);
-        }
-    });
 });

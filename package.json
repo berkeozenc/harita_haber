@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "googlemaps": "^1.0.2"
+    "googlemaps": "^1.0.2",
+    "mongoose": "^4.3.5"
   },
   "engines": {
     "node": "4.1.1"
