@@ -1,0 +1,23 @@
+{
+  "name": "HaritaHaber",
+  "version": "1.0.0",
+  "description": "--",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "googlemaps",
+    "express"
+  ],
+  "author": "Berke",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "googlemaps": "^1.0.2"
+  },
+  "engines": {
+    "node": "4.1.1"
+  }
+}
