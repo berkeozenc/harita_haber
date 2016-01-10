@@ -1,5 +1,4 @@
 var express = require("express");
-var GoogleMapsAPI = require("googlemaps");
 var mongoose = require('mongoose');
 
 
@@ -13,15 +12,6 @@ var Address = mongoose.model('Address');
 
 var berkedeneme;
 var address;
-
-
-var publicConfig = {
-    key: process.env.API_KEY,
-    stagger_time:       1000,
-    encode_polylines:   false,
-    secure:             false
-};
-var gmAPI = new GoogleMapsAPI(publicConfig);
 
 
 app.get("/", function(req, res, next) {
